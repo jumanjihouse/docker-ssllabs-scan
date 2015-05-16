@@ -9,6 +9,8 @@ Docker image: [https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/]
 
 Build status: [![Circle CI](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan/tree/master.svg?style=svg)](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan/tree/master)
 
+Layers: [![](https://badge.imagelayers.io/jumanjiman/ssllabs-scan.svg)](https://imagelayers.io/?images=jumanjiman/ssllabs-scan:latest 'Get your own badge on imagelayers.io')
+
 
 About
 -----
