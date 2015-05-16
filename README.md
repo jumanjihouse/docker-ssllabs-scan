@@ -38,6 +38,8 @@ How-to
 
 ### Build
 
+:warning: Build requires Docker 1.6.0 or later.
+
     make all
 
 
