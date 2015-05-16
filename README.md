@@ -7,6 +7,8 @@ Source code: [https://github.com/jumanjihouse/docker-ssllabs-scan]
 Docker image: [https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/]
 (https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/)
 
+Build status: [![Circle CI](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan/tree/master.svg?style=svg)](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan/tree/master)
+
 
 About
 -----
