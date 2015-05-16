@@ -1,0 +1,5 @@
+FROM scratch
+COPY ssllabs-scan /
+COPY ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+ENTRYPOINT ["/ssllabs-scan"]
+CMD ["--help"]

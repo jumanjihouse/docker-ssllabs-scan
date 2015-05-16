@@ -1,0 +1,16 @@
+FROM alpine:latest
+
+ENV version 1.1.0
+
+RUN apk upgrade --update --available && \
+    apk add \
+      ca-certificates \
+      go \
+    && rm -f /var/cache/apk/*
+
+ADD https://github.com/ssllabs/ssllabs-scan/archive/v${version}.tar.gz /tmp/
+
+RUN cd /tmp && \
+    tar xvzf v${version}.tar.gz && \
+    cd ssllabs-scan-${version} && \
+    GOPATH=~ CGO_ENABLED=0 GOOS=linux go build -a -tags netgo -ldflags '-w' ssllabs-scan.go
