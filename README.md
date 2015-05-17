@@ -41,7 +41,7 @@ How-to
 
 ### Build
 
-:warning: Build requires Docker 1.6.0 or later.
+:warning: Build requires Docker 1.6.0 or later (for `docker build -f <dockerfile>`).
 
     make all
 
