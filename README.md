@@ -1,15 +1,14 @@
 SSL site scanner
 ================
 
+[![](https://badge.imagelayers.io/jumanjiman/ssllabs-scan.svg)](https://imagelayers.io/?images=jumanjiman/ssllabs-scan:latest 'Get your own badge on imagelayers.io')&nbsp;
+[![Circle CI](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan.png?circle-token=b75db48608f115c0cb9760708be3839b48d41f8e)](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan.png?circle-token=b75db48608f115c0cb9760708be3839b48d41f8e)
+
 Source code: [https://github.com/jumanjihouse/docker-ssllabs-scan]
 (https://github.com/jumanjihouse/docker-ssllabs-scan)
 
 Docker image: [https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/]
 (https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/)
-
-Build status: [![Circle CI](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan/tree/master.svg?style=svg)](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan/tree/master)
-
-Layers: [![](https://badge.imagelayers.io/jumanjiman/ssllabs-scan.svg)](https://imagelayers.io/?images=jumanjiman/ssllabs-scan:latest 'Get your own badge on imagelayers.io')
 
 
 About
