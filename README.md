@@ -39,11 +39,12 @@ in this git repo.
 How-to
 ------
 
-### Build
+### Build and test
 
 :warning: Build requires Docker 1.6.0 or later (for `docker build -f <dockerfile>`).
 
     make all
+    make test
 
 
 ### Pull an already-built image
