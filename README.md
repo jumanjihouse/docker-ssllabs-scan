@@ -48,7 +48,13 @@ How-to
 
 ### Pull an already-built image
 
-    docker pull jumanjiman/ssllabs-scan
+For user convenience, each published image is tagged with
+`<upstream-version-number>-<git-short-hash>` to correlate
+with both the upstream software release and the git commit
+of this repo. The "latest" tag always points to the most
+recent build.
+
+    docker pull jumanjiman/ssllabs-scan:latest
 
 
 ### Run
