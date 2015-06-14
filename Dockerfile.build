@@ -6,12 +6,15 @@ RUN apk upgrade --update --available && \
     apk add \
       ca-certificates \
       go \
+    && adduser -D developer \
     && rm -f /var/cache/apk/*
 
-ADD https://github.com/ssllabs/ssllabs-scan/archive/v${version}.tar.gz /tmp/
+# Run subsequent commands as "developer".
+USER developer
 
 # https://github.com/golang/go/issues/9344#issuecomment-69944514
 RUN cd /tmp && \
+    wget https://github.com/ssllabs/ssllabs-scan/archive/v${version}.tar.gz && \
     tar xvzf v${version}.tar.gz && \
     cd ssllabs-scan-${version} && \
     GOPATH=~ CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -tags netgo -ldflags '-w' ssllabs-scan.go
