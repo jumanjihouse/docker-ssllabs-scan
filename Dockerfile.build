@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.2
 
 ENV version 1.1.0
 
@@ -10,7 +10,8 @@ RUN apk upgrade --update --available && \
 
 ADD https://github.com/ssllabs/ssllabs-scan/archive/v${version}.tar.gz /tmp/
 
+# https://github.com/golang/go/issues/9344#issuecomment-69944514
 RUN cd /tmp && \
     tar xvzf v${version}.tar.gz && \
     cd ssllabs-scan-${version} && \
-    GOPATH=~ CGO_ENABLED=0 GOOS=linux go build -a -tags netgo -ldflags '-w' ssllabs-scan.go
+    GOPATH=~ CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -tags netgo -ldflags '-w' ssllabs-scan.go
