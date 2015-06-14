@@ -59,11 +59,19 @@ recent build.
 
 ### Run
 
-    user@devenv:~/ssllabs-scan$ docker run --read-only --rm -it jumanjiman/ssllabs-scan https://github.com/
-    2015/05/16 18:06:39 [INFO] SSL Labs v1.16.14 (criteria version 2009i)
-    2015/05/16 18:06:39 [NOTICE] Server message: This assessment service is provided free of charge by Qualys SSL Labs, subject to our terms and conditions: https://www.ssllabs.com/about/terms.html
-    2015/05/16 18:06:41 [INFO] Assessment starting: https://github.com/
-    2015/05/16 18:08:21 [INFO] Assessment complete: https://github.com/ (1 host in 95 seconds)
-        192.30.252.131: A+
-    -snip copious json output-
-    2015/05/16 18:08:21 [INFO] All assessments complete; shutting down
+The following example uses `--read-only` and `--cap-drop all` as recommended by the
+[CIS Docker Security Benchmark](https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.6_Benchmark_v1.0.0.pdf).
+
+    user@devenv:~$ docker_opts="--read-only --cap-drop all --rm -it"
+    user@devenv:~$ image="jumanjiman/ssllabs-scan:latest"
+    user@devenv:~$ scan_opts="-grade -usecache"
+    user@devenv:~$ url_to_scan="https://github.com/"
+    user@devenv:~$ docker run ${docker_opts} ${image} ${scan_opts} ${url_to_scan}
+    2015/06/14 23:01:01 [INFO] SSL Labs v1.18.1 (criteria version 2009j)
+    2015/06/14 23:01:01 [NOTICE] Server message: This assessment service is provided free of charge by Qualys SSL Labs, subject to our terms and conditions: https://www.ssllabs.com/about/terms.html
+    2015/06/14 23:01:03 [INFO] Assessment starting: https://github.com
+    2015/06/14 23:01:04 [INFO] Assessment complete: https://github.com (1 host in 96 seconds)
+        192.30.252.129: A+
+    "https://github.com": "A+"
+
+    2015/06/14 23:01:04 [INFO] All assessments complete; shutting down

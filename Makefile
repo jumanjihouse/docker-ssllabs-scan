@@ -23,4 +23,9 @@ runtime: static certfile
 
 test:
 	docker images | grep ssllabs-scan
-	docker run -it jumanjiman/ssllabs-scan -grade -usecache https://github.com
+ifdef CIRCLECI
+	# Circle fails to drop all capabilities.
+	docker run -it --read-only jumanjiman/ssllabs-scan -grade -usecache https://github.com
+else
+	docker run -it --read-only --cap-drop all jumanjiman/ssllabs-scan -grade -usecache https://github.com
+endif
