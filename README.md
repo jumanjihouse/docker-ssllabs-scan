@@ -63,11 +63,11 @@ recent build.
 The following example uses `--read-only` and `--cap-drop all` as recommended by the
 [CIS Docker Security Benchmark](https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.6_Benchmark_v1.0.0.pdf).
 
-    user@devenv:~$ docker_opts="--read-only --cap-drop all --rm -it"
-    user@devenv:~$ image="jumanjiman/ssllabs-scan:latest"
-    user@devenv:~$ scan_opts="-grade -usecache"
-    user@devenv:~$ url_to_scan="https://github.com/"
-    user@devenv:~$ docker run ${docker_opts} ${image} ${scan_opts} ${url_to_scan}
+    $ docker_opts="--read-only --cap-drop all --rm -it"
+    $ image="jumanjiman/ssllabs-scan:latest"
+    $ scan_opts="-grade -usecache"
+    $ url_to_scan="https://github.com/"
+    $ docker run ${docker_opts} ${image} ${scan_opts} ${url_to_scan}
     2015/06/14 23:01:01 [INFO] SSL Labs v1.18.1 (criteria version 2009j)
     2015/06/14 23:01:01 [NOTICE] Server message: This assessment service is provided free of charge by Qualys SSL Labs, subject to our terms and conditions: https://www.ssllabs.com/about/terms.html
     2015/06/14 23:01:03 [INFO] Assessment starting: https://github.com
