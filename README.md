@@ -50,7 +50,7 @@ How-to
 ### Pull an already-built image
 
 For user convenience, each published image is tagged with
-`<upstream-version-number>-<git-short-hash>` to correlate
+`<upstream-version-number>-<date>T<time>-git-<git-short-hash>` to correlate
 with both the upstream software release and the git commit
 of this repo. The "latest" tag always points to the most
 recent build.
