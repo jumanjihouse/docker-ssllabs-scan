@@ -2,7 +2,7 @@
 machine:
   environment:
     # If you change this, you should change it in Dockerfile.build, too.
-    VERSION: 1.2.0
+    VERSION: 1.3.0
     TAG: ${VERSION}-$(date +%Y%m%dT%H%M)-git-${CIRCLE_SHA1:0:7}
   services:
     - docker
