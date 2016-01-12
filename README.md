@@ -30,6 +30,18 @@ which can be found here:
 (https://www.ssllabs.com/about/terms.html)
 
 
+### Build integrity
+
+The repo is set up to compile the software in a "builder" container, then
+copy the statically-compiled binary into a "runtime" container
+free of development tools or other binaries that could be abused.
+An unattended test harness runs the build script and runs acceptance tests.
+If all tests pass on master branch in the unattended test harness,
+it pushes the built images to the Docker hub.
+
+![workflow](assets/docker_hub_workflow.png)
+
+
 License
 -------
 
