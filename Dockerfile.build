@@ -7,7 +7,7 @@ RUN apk upgrade --update --available && \
     apk add \
       go \
     && apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/main \
-      'ca-certificates>=20160104-r0' \
+      'ca-certificates>=20160104-r2' \
     && adduser -D developer \
     && rm -f /var/cache/apk/*
 
