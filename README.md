@@ -89,3 +89,27 @@ The following example uses `--read-only` and `--cap-drop all` as recommended by 
     "https://github.com": "A+"
 
     2015/06/14 23:01:04 [INFO] All assessments complete; shutting down
+
+
+You can also use the `-hostfile` option if you inject a local
+file into the container:
+
+    # Create a hostfile in local filesystem.
+    $ ls -la /tmp/sites.txt
+    -rw-r--r--    1 user     user            48 Mar 12 15:39 /tmp/sites.txt
+
+    # Use docker `-v` option to inject a file into the container to use -hostfile option.
+    $ docker run -v /tmp:/tmp:ro ${docker_opts} ${image} -hostfile /tmp/sites.txt ${scan_opts}
+    2016/03/12 15:45:01 [INFO] SSL Labs v1.22.37 (criteria version 2009l)
+    2016/03/12 15:45:01 [NOTICE] Server message: This assessment service is provided free of charge by Qualys SSL Labs, subject to our terms and conditions: https://www.ssllabs.com/about/terms.html
+    2016/03/12 15:45:03 [INFO] Assessment starting: https://www.github.com/
+    2016/03/12 15:45:04 [INFO] Assessment starting: https://www.google.com/
+    2016/03/12 15:45:04 [INFO] Assessment complete: https://www.github.com/ (1 host in 83 seconds)
+        192.30.252.129: A
+    2016/03/12 15:45:05 [INFO] Assessment complete: https://www.google.com/ (2 hosts in 109 seconds)
+        2607:f8b0:4005:802:0:0:0:2004: B
+        172.217.2.36: B
+    "https://www.github.com/": "A"
+    "https://www.google.com/": "B"
+
+    2016/03/12 15:45:05 [INFO] All assessments complete; shutting down
