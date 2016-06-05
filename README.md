@@ -1,7 +1,7 @@
 SSL site scanner
 ================
 
-[![Image Size](https://img.shields.io/imagelayers/image-size/jumanjiman/ssllabs-scan/latest.svg)](https://imagelayers.io/?images=jumanjiman/ssllabs-scan:latest 'View image size and layers')&nbsp;
+[![](https://imagelayers.io/badge/jumanjiman/ssllabs-scan:latest.svg)](https://imagelayers.io/?images=jumanjiman/ssllabs-scan:latest 'View on imagelayers.io')&nbsp;
 [![Docker Registry](https://img.shields.io/docker/pulls/jumanjiman/ssllabs-scan.svg)](https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan)&nbsp;
 [![Circle CI](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan.png?circle-token=b75db48608f115c0cb9760708be3839b48d41f8e)](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan/tree/master 'View CI builds')
 
