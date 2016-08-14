@@ -20,7 +20,11 @@ certfile: static
 	docker cp scanbuild:/etc/ssl/certs/ca-certificates.crt .
 
 runtime: static certfile
-	docker build -t jumanjiman/ssllabs-scan -f Dockerfile.runtime .
+	docker build \
+		--build-arg BUILD_DATE=${BUILD_DATE} \
+		--build-arg VCS_REF=${VCS_REF} \
+		--build-arg VERSION=${VERSION} \
+		-t jumanjiman/ssllabs-scan -f Dockerfile.runtime .
 	docker images | grep ssllabs-scan
 
 test:

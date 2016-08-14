@@ -1,4 +1,21 @@
 FROM scratch
+
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+
+LABEL \
+    org.label-schema.name="jumanjiman/ssllabs-scan" \
+    org.label-schema.description="scans secure websites with the Qualys SSL Labs service" \
+    org.label-schema.url="https://github.com/jumanjihouse/docker-ssllabs-scan" \
+    org.label-schema.vcs-url="https://github.com/jumanjihouse/docker-ssllabs-scan.git" \
+    org.label-schema.docker.dockerfile="/Dockerfile.runtime" \
+    org.label-schema.vcs-type="Git" \
+    org.label-schema.license="https://www.ssllabs.com/about/terms.html" \
+    org.label-schema.build-date=$BUILD_DATE \
+    org.label-schema.vcs-ref=$VCS_REF \
+    org.label-schema.version=$VERSION
+
 COPY ssllabs-scan /
 COPY ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 ENTRYPOINT ["/ssllabs-scan"]
