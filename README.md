@@ -1,7 +1,8 @@
 SSL site scanner
 ================
 
-[![](https://imagelayers.io/badge/jumanjiman/ssllabs-scan:latest.svg)](https://imagelayers.io/?images=jumanjiman/ssllabs-scan:latest 'View on imagelayers.io')&nbsp;
+[![Download size](https://images.microbadger.com/badges/image/jumanjiman/ssllabs-scan.svg)](http://microbadger.com/images/jumanjiman/ssllabs-scan "View on microbadger.com")&nbsp;
+[![Version](https://images.microbadger.com/badges/version/jumanjiman/ssllabs-scan.svg)](http://microbadger.com/images/jumanjiman/ssllabs-scan "View on microbadger.com")&nbsp;
 [![Docker Registry](https://img.shields.io/docker/pulls/jumanjiman/ssllabs-scan.svg)](https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan "Go to Docker hub")&nbsp;
 [![Circle CI](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan.png?circle-token=b75db48608f115c0cb9760708be3839b48d41f8e)](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan/tree/master 'View CI builds')
 
@@ -10,6 +11,9 @@ Source code: [https://github.com/jumanjihouse/docker-ssllabs-scan]
 
 Docker image: [https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/]
 (https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/)
+
+Image metadata: [http://microbadger.com/images/jumanjiman/ssllabs-scan]
+(http://microbadger.com/images/jumanjiman/ssllabs-scan)
 
 
 About

@@ -33,3 +33,4 @@ deployment:
       - docker push jumanjiman/ssllabs-scan:${TAG}
       - docker push jumanjiman/ssllabs-scan:latest
       - docker logout
+      - curl -X POST 'https://hooks.microbadger.com/images/jumanjiman/ssllabs-scan/dsQe3-XA4hIfa2qdd_qndJZrOMg='
