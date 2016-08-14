@@ -54,8 +54,9 @@ How-to
 
 ### Build and test
 
-:warning: Build requires Docker 1.6.0 or later (for `docker build -f <dockerfile>`).
+:warning: Build requires Docker 1.9.0 or later (for `docker build --build-arg`).
 
+    # Note: see circle.yml for environment variables that Makefile expects.
     make all
     make test
 

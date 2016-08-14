@@ -10,7 +10,9 @@ clean:
 	docker rmi -f scanbuild || :
 
 static: clean
-	docker build -t scanbuild -f Dockerfile.build .
+	docker build \
+		--build-arg version=${VERSION} \
+		-t scanbuild -f Dockerfile.build .
 	docker create --name scanbuild scanbuild true
 	docker cp scanbuild:/tmp/ssllabs-scan-1.3.0/ssllabs-scan .
 
