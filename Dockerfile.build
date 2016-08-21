@@ -19,4 +19,12 @@ RUN cd /tmp && \
     wget https://github.com/ssllabs/ssllabs-scan/archive/v${version}.tar.gz && \
     tar xvzf v${version}.tar.gz && \
     cd ssllabs-scan-${version} && \
-    GOPATH=~ CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -tags netgo -ldflags '-w' ssllabs-scan.go
+    GOPATH=~ \
+    CGO_ENABLED=0 \
+    GOOS=linux \
+    go build \
+      -a \
+      -installsuffix cgo \
+      -tags netgo \
+      -ldflags '-w' \
+      ssllabs-scan.go
