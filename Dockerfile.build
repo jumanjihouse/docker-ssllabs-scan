@@ -27,5 +27,5 @@ RUN cd /tmp && \
       -buildmode=exe \
       -installsuffix cgo \
       -tags netgo \
-      -ldflags '-w' \
+      -ldflags '-w -s' \
       ssllabs-scan.go
