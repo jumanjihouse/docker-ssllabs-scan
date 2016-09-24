@@ -10,6 +10,9 @@ clean:
 	docker rmi -f scanbuild || :
 
 static: clean
+ifndef VERSION
+	$(error VERSION environment variable is not set)
+endif
 	docker build \
 		--build-arg version=${VERSION} \
 		-t scanbuild -f Dockerfile.build .
