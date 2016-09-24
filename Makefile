@@ -31,6 +31,9 @@ test:
 	# Check that image exists.
 	docker images | grep ssllabs-scan
 
+	# Check that binary has read-only relocations.
+	readelf -lW ssllabs-scan | grep GNU_RELRO
+
 	# Check that binary is static.
 	file ssllabs-scan | grep -oh 'statically linked'
 

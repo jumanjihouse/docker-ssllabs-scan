@@ -3,8 +3,11 @@ FROM alpine:3.4
 ARG version
 
 RUN apk upgrade --update --available && \
+    apk add --no-cache \
+      musl-dev \
+      && \
     apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/community \
-      'go>=1.7-r0' \
+      'go>=1.7.1-r0' \
     && apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/main \
       'ca-certificates>=20160104-r5' \
       openssl \
@@ -22,10 +25,9 @@ RUN cd /tmp && \
     GOPATH=~ \
     CGO_ENABLED=0 \
     GOOS=linux \
+    LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH \
     go build \
       -a \
-      -buildmode=exe \
-      -installsuffix cgo \
       -tags netgo \
-      -ldflags '-w -s' \
+      -ldflags '-extldflags "-static" -s' \
       ssllabs-scan.go
