@@ -24,6 +24,7 @@ certfile: static
 
 runtime: static certfile
 	docker build \
+		--build-arg CI_BUILD_URL=${CIRCLE_BUILD_URL} \
 		--build-arg BUILD_DATE=${BUILD_DATE} \
 		--build-arg VCS_REF=${VCS_REF} \
 		--build-arg VERSION=${VERSION} \
@@ -42,6 +43,12 @@ test:
 
 	# Check that binary is stripped (no debug symbols).
 	file ssllabs-scan | grep -oh 'stripped'
+
+	# Check that image has ci-build-url label.
+	docker inspect \
+		-f '{{ index .Config.Labels "io.github.jumanjiman.ci-build-url" }}' \
+		jumanjiman/ssllabs-scan | \
+		grep 'circleci.com'
 
 	# Check that binary works.
 ifdef CIRCLECI

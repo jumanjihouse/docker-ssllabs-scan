@@ -76,6 +76,24 @@ recent build.
     docker pull jumanjiman/ssllabs-scan:latest
 
 
+### View image labels
+
+Each built image has labels that generally follow http://label-schema.org/
+
+We add a label, `ci-build-url`, that is not currently part of the schema.
+This extra label provides a permanent link to the CI build for the image.
+
+View the ci-build-url label on a built image:
+
+    docker inspect \
+      -f '{{ index .Config.Labels "io.github.jumanjiman.ci-build-url" }}' \
+      jumanjiman/ssllabs-scan
+
+Query all the labels inside a built image:
+
+    docker inspect jumanjiman/ssllabs-scan | jq -M '.[].Config.Labels'
+
+
 ### Run
 
 The following example uses `--read-only` and `--cap-drop all` as recommended by the
