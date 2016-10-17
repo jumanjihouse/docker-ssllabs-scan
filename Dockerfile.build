@@ -10,7 +10,6 @@ RUN apk upgrade --update --available && \
       'go>=1.7.1-r0' \
     && apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/main \
       'ca-certificates>=20160104-r5' \
-      openssl \
     && adduser -D developer \
     && rm -f /var/cache/apk/*
 
