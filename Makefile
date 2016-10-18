@@ -44,6 +44,7 @@ test:
 	# Check that binary is stripped (no debug symbols).
 	file ssllabs-scan | grep -oh 'stripped'
 
+ifdef CIRCLECI
 	# Check that image has ci-build-url label.
 	docker inspect \
 		-f '{{ index .Config.Labels "io.github.jumanjiman.ci-build-url" }}' \
@@ -51,7 +52,6 @@ test:
 		grep 'circleci.com'
 
 	# Check that binary works.
-ifdef CIRCLECI
 	# Circle fails to drop all capabilities.
 	docker run -it --read-only jumanjiman/ssllabs-scan -grade -usecache https://github.com
 else
