@@ -15,6 +15,9 @@ Docker image: [https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/]
 Image metadata: [http://microbadger.com/images/jumanjiman/ssllabs-scan]
 (http://microbadger.com/images/jumanjiman/ssllabs-scan)
 
+:warning: You must use version 1.4.0 or later of this image
+for compatibility with the Qualys SSL Labs Service API.
+
 
 About
 -----
