@@ -17,7 +17,7 @@ endif
 		--build-arg version=${VERSION} \
 		-t scanbuild -f Dockerfile.build .
 	docker create --name scanbuild scanbuild true
-	docker cp scanbuild:/tmp/ssllabs-scan-1.3.0/ssllabs-scan .
+	docker cp scanbuild:/tmp/ssllabs-scan-${VERSION}/ssllabs-scan .
 
 certfile: static
 	docker cp scanbuild:/etc/ssl/certs/ca-certificates.crt .
