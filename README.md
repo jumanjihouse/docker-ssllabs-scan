@@ -100,7 +100,11 @@ Query all the labels inside a built image:
 ### Run
 
 The following example uses `--read-only` and `--cap-drop all` as recommended by the
-[CIS Docker Security Benchmark](https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.6_Benchmark_v1.0.0.pdf).
+CIS Docker Security Benchmarks:
+
+* [Docker 1.6](https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.6_Benchmark_v1.0.0.pdf)
+* [Docker 1.11](https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.11.0_Benchmark_v1.0.0.pdf)
+* [Docker 1.12](https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.12.0_Benchmark_v1.0.0.pdf)
 
     $ docker_opts="--read-only --cap-drop all --rm -it"
     $ image="jumanjiman/ssllabs-scan:latest"
