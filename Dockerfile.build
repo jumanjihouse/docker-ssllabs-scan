@@ -4,12 +4,13 @@ ARG version
 
 RUN apk upgrade --update --available && \
     apk add --no-cache \
+      curl \
       musl-dev \
       && \
     apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/community \
-      'go>=1.7.1-r0' \
+      'go>=1.7.3-r0' \
     && apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/main \
-      'ca-certificates>=20160104-r5' \
+      'ca-certificates>=20161130-r0' \
     && adduser -D developer \
     && rm -f /var/cache/apk/*
 
@@ -18,7 +19,7 @@ USER developer
 
 # https://github.com/golang/go/issues/9344#issuecomment-69944514
 RUN cd /tmp && \
-    wget https://github.com/ssllabs/ssllabs-scan/archive/v${version}.tar.gz && \
+    curl -sSLO https://github.com/ssllabs/ssllabs-scan/archive/v${version}.tar.gz && \
     tar xvzf v${version}.tar.gz && \
     cd ssllabs-scan-${version} && \
     GOPATH=~ \
