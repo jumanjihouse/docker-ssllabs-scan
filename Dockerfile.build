@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.5
 
 ARG version
 
@@ -30,4 +30,5 @@ RUN cd /tmp && \
       -a \
       -tags netgo \
       -ldflags '-extldflags "-static" -s' \
+      -buildmode exe \
       ssllabs-scan.go
