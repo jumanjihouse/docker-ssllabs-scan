@@ -6,14 +6,9 @@ SSL site scanner
 [![Docker Registry](https://img.shields.io/docker/pulls/jumanjiman/ssllabs-scan.svg)](https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan "Go to Docker hub")&nbsp;
 [![Circle CI](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan.png?circle-token=b75db48608f115c0cb9760708be3839b48d41f8e)](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan/tree/master 'View CI builds')
 
-Source code: [https://github.com/jumanjihouse/docker-ssllabs-scan]
-(https://github.com/jumanjihouse/docker-ssllabs-scan)
-
-Docker image: [https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/]
-(https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/)
-
-Image metadata: [http://microbadger.com/images/jumanjiman/ssllabs-scan]
-(http://microbadger.com/images/jumanjiman/ssllabs-scan)
+Source code:    https://github.com/jumanjihouse/docker-ssllabs-scan/<br/>
+Docker image:   https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/<br/>
+Image metadata: http://microbadger.com/images/jumanjiman/ssllabs-scan/
 
 :warning: You must use version 1.4.0 or later of this image
 for compatibility with the Qualys SSL Labs Service API.
@@ -23,8 +18,7 @@ About
 -----
 
 This git repo downloads golang source code from
-[https://github.com/ssllabs/ssllabs-scan]
-(https://github.com/ssllabs/ssllabs-scan)
+https://github.com/ssllabs/ssllabs-scan
 and builds a tiny docker image that scans secure websites
 with the Qualys SSL Labs service.
 
@@ -33,8 +27,7 @@ The image contains a static binary and CA certificates. Nothing else.
 
 Before you use this tool please review the terms and conditions,
 which can be found here:
-[https://www.ssllabs.com/about/terms.html]
-(https://www.ssllabs.com/about/terms.html)
+https://www.ssllabs.com/about/terms.html
 
 
 ### Build integrity
