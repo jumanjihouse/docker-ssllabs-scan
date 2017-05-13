@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+cat > ci/vars <<EOF
+  VERSION=1.4.0
+  BUILD_DATE=$(date +%Y%m%dT%H%M)
+  VCS_REF=${CIRCLE_SHA1:0:7}
+  TAG=\${VERSION}-\${BUILD_DATE}-git-\${VCS_REF}
+
+  export VERSION
+  export BUILD_DATE
+  export VCS_REF
+  export TAG
+EOF
+
+. ci/vars
+make all

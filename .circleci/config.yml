@@ -1,0 +1,30 @@
+# https://circleci.com/docs/docker
+version: 2
+jobs:
+  build:
+    docker:
+      - image: jumanjiman/cci:20170513T1252-git-0188fa5
+
+    working_directory: ~/workdir/
+
+    steps:
+      - setup_remote_docker
+
+      - checkout
+
+      - run:
+          name: Build the image
+          command: |
+            ci/build
+
+      - run:
+          name: Test the image
+          command: |
+            ci/test
+
+      - deploy:
+          name: Deploy from master branch
+          command: |
+            if [[ ${CIRCLE_BRANCH} = master ]] && [[ -z ${CIRCLE_PR_NUMBER} ]]; then
+              ci/publish
+            fi
