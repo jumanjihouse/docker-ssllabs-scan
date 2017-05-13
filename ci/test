@@ -20,4 +20,7 @@ if [ -n "${CIRCLECI}" ]; then
 fi
 
 # Check that binary works.
-docker run -it --read-only --cap-drop all jumanjiman/ssllabs-scan -grade -usecache https://github.com
+docker-compose run --rm grade_github
+
+# Another syntax to do the same thing.
+docker-compose run --rm scanner -grade -usecache https://github.com

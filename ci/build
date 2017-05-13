@@ -18,24 +18,17 @@ EOF
 ci/clean
 
 # Build the builder.
-docker build \
-  --build-arg VERSION=${VERSION} \
-  -t scanbuild -f Dockerfile.build .
+docker-compose build builder
 
 # Copy binary into local directory.
-docker create --name scanbuild scanbuild true
+docker create --name scanbuild builder true
 docker cp scanbuild:/tmp/ssllabs-scan-${VERSION}/ssllabs-scan .
 
 # Copy certs into local directory.
 docker cp scanbuild:/etc/ssl/certs/ca-certificates.crt .
 
 # Build the runtime image.
-docker build \
-  --build-arg CIRCLE_BUILD_URL=${CIRCLE_BUILD_URL} \
-  --build-arg BUILD_DATE=${BUILD_DATE} \
-  --build-arg VCS_REF=${VCS_REF} \
-  --build-arg VERSION=${VERSION} \
-  -t jumanjiman/ssllabs-scan -f Dockerfile.runtime .
+docker-compose build scanner
 
 # Show image sizes.
 docker images | grep ssllabs-scan
