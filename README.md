@@ -56,9 +56,8 @@ How-to
 
 :warning: Build requires Docker 1.9.0 or later (for `docker build --build-arg`).
 
-    # Note: see circle.yml for environment variables that Makefile expects.
-    make all
-    make test
+    ci/build
+    ci/test
 
 
 ### Pull an already-built image
