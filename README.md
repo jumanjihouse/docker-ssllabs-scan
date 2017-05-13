@@ -54,7 +54,7 @@ How-to
 
 ### Build and test
 
-:warning: Build requires Docker 1.9.0 or later (for `docker build --build-arg`).
+:warning: Build requires Docker 1.9.0 or later as well as docker-compose.
 
     ci/build
     ci/test
@@ -138,3 +138,17 @@ file into the container:
     "https://www.google.com/": "B"
 
     2016/03/12 15:45:05 [INFO] All assessments complete; shutting down
+
+
+You can use `docker-compose` with the `docker-compose.yaml` file in this git repo:
+
+    $ docker-compose run --rm scanner -grade -usecache https://github.com
+    2017/05/13 15:35:37 [INFO] SSL Labs v1.28.5 (criteria version 2009o)
+    2017/05/13 15:35:37 [NOTICE] Server message: This assessment service is provided free of charge by Qualys SSL Labs, subject to our terms and conditions: https://www.ssllabs.com/about/terms.html
+    2017/05/13 15:35:39 [INFO] Assessment starting: https://github.com
+    2017/05/13 15:35:40 [INFO] Assessment complete: https://github.com (2 hosts in 108 seconds)
+        192.30.255.112: A+
+        192.30.255.113: A+
+    "https://github.com": "A+"
+
+    2017/05/13 15:35:40 [INFO] All assessments complete; shutting down

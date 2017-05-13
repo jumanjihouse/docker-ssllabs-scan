@@ -1,0 +1,36 @@
+version: '2.1'
+
+services:
+  builder:
+    image: builder
+    env_file: ci/vars
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+      args:
+        - VERSION
+
+  scanner: &defaults
+    image: jumanjiman/ssllabs-scan
+    env_file: ci/vars
+    build:
+      context: .
+      dockerfile: Dockerfile.runtime
+      args:
+        - CIRCLE_BUILD_URL
+        - BUILD_DATE
+        - VCS_REF
+        - VERSION
+    read_only: true
+    cap_drop:
+      - all
+    pids_limit: 10
+    cpu_shares: 512
+    mem_limit: 32M
+    shm_size: 16M
+    stdin_open: true
+    tty: true
+
+  grade_github:
+    <<: *defaults
+    command: -grade -usecache https://github.com

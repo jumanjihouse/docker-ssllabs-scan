@@ -14,4 +14,21 @@ cat > ci/vars <<EOF
 EOF
 
 . ci/vars
-make all
+
+ci/clean
+
+# Build the builder.
+docker-compose build builder
+
+# Copy binary into local directory.
+docker create --name scanbuild builder true
+docker cp scanbuild:/tmp/ssllabs-scan-${VERSION}/ssllabs-scan .
+
+# Copy certs into local directory.
+docker cp scanbuild:/etc/ssl/certs/ca-certificates.crt .
+
+# Build the runtime image.
+docker-compose build scanner
+
+# Show image sizes.
+docker images | grep ssllabs-scan

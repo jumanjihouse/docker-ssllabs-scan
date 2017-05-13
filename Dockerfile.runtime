@@ -1,12 +1,12 @@
 FROM scratch
 
-ARG CI_BUILD_URL
+ARG CIRCLE_BUILD_URL
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
 
 LABEL \
-    io.github.jumanjiman.ci-build-url=$CI_BUILD_URL \
+    io.github.jumanjiman.ci-build-url=$CIRCLE_BUILD_URL \
     org.label-schema.name="jumanjiman/ssllabs-scan" \
     org.label-schema.description="scans secure websites with the Qualys SSL Labs service" \
     org.label-schema.url="https://github.com/jumanjihouse/docker-ssllabs-scan" \

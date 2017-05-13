@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+# Clean up from previous runs.
+rm -f ca-certificates.crt || :
+rm -f ssllabs-scan        || :
+docker rm -f scanbuild    || :
+docker rmi -f scanbuild   || :
