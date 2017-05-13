@@ -31,7 +31,7 @@ docker cp scanbuild:/etc/ssl/certs/ca-certificates.crt .
 
 # Build the runtime image.
 docker build \
-  --build-arg CI_BUILD_URL=${CIRCLE_BUILD_URL} \
+  --build-arg CIRCLE_BUILD_URL=${CIRCLE_BUILD_URL} \
   --build-arg BUILD_DATE=${BUILD_DATE} \
   --build-arg VCS_REF=${VCS_REF} \
   --build-arg VERSION=${VERSION} \
