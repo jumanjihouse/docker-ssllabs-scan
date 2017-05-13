@@ -1,6 +1,6 @@
 FROM alpine:3.5
 
-ARG version
+ARG VERSION
 
 RUN apk upgrade --update --available && \
     apk add --no-cache \
@@ -19,9 +19,9 @@ USER developer
 
 # https://github.com/golang/go/issues/9344#issuecomment-69944514
 RUN cd /tmp && \
-    curl -sSLO https://github.com/ssllabs/ssllabs-scan/archive/v${version}.tar.gz && \
-    tar xvzf v${version}.tar.gz && \
-    cd ssllabs-scan-${version} && \
+    curl -sSLO https://github.com/ssllabs/ssllabs-scan/archive/v${VERSION}.tar.gz && \
+    tar xvzf v${VERSION}.tar.gz && \
+    cd ssllabs-scan-${VERSION} && \
     GOPATH=~ \
     CGO_ENABLED=0 \
     GOOS=linux \

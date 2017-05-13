@@ -19,7 +19,7 @@ ci/clean
 
 # Build the builder.
 docker build \
-  --build-arg version=${VERSION} \
+  --build-arg VERSION=${VERSION} \
   -t scanbuild -f Dockerfile.build .
 
 # Copy binary into local directory.
