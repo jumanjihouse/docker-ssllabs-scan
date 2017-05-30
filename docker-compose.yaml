@@ -24,7 +24,7 @@ services:
     read_only: true
     cap_drop:
       - all
-    pids_limit: 10
+    pids_limit: 15
     cpu_shares: 512
     mem_limit: 32M
     shm_size: 16M

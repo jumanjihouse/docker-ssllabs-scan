@@ -3,7 +3,8 @@ version: 2
 jobs:
   build:
     docker:
-      - image: jumanjiman/cci:20170513T1252-git-0188fa5
+      # https://github.com/jumanjihouse/cci/pulls?q=is%3Apr+is%3Aclosed
+      - image: jumanjiman/cci:20170530T0443-git-02c4a0c
 
     working_directory: ~/workdir/
 
