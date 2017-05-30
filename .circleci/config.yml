@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: jumanjiman/cci:20170513T1252-git-0188fa5
+      - image: jumanjiman/cci:20170530T0430-git-a951a54
 
     working_directory: ~/workdir/
 
