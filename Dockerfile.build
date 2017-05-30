@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.6
 
 ARG VERSION
 
@@ -8,7 +8,7 @@ RUN apk upgrade --update --available && \
       musl-dev \
       && \
     apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/community \
-      'go>=1.7.4-r2' \
+      'go>=1.8.1-r0' \
     && apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/main \
       'ca-certificates>=20161130-r2' \
     && adduser -D developer \
