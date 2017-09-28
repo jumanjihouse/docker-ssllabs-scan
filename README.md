@@ -23,7 +23,14 @@ and builds a tiny docker image that scans secure websites
 with the Qualys SSL Labs service.
 
 The build takes about 30 seconds and results in a 5 MiB Docker image.
-The image contains a static binary and CA certificates. Nothing else.
+<br/>The runtime image contains **only**:
+
+* a static binary,
+* CA certificates, and
+* `/etc/passwd` to provide an unprivileged user.
+
+The container runs as an unprivileged user via the technique described in
+[this Medium post](https://medium.com/@lizrice/non-privileged-containers-based-on-the-scratch-image-a80105d6d341).
 
 Before you use this tool please review the terms and conditions,
 which can be found here:

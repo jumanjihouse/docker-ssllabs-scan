@@ -1,0 +1,8 @@
+# This image is used in the test harness to
+# prove a scratch container can run as a non-root user.
+FROM scratch
+
+COPY sleeper /
+COPY passwd /etc/passwd
+USER user
+ENTRYPOINT ["/sleeper"]

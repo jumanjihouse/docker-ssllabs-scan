@@ -31,6 +31,15 @@ services:
     stdin_open: true
     tty: true
 
+  # This image is used in the test harness.
+  # Use the default settings to run read-only, etc.
+  sleeper:
+    <<: *defaults
+    image: sleeper
+    build:
+      context: .
+      dockerfile: Dockerfile.sleeper
+
   grade_github:
     <<: *defaults
     command: -grade -usecache https://github.com

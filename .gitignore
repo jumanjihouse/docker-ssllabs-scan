@@ -1,5 +1,6 @@
 *~
 *.swp
+sleeper
 ssllabs-scan
 ca-certificates.crt
 ci/vars

@@ -20,5 +20,7 @@ LABEL \
 
 COPY ssllabs-scan /
 COPY ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY passwd /etc/passwd
+USER user
 ENTRYPOINT ["/ssllabs-scan"]
 CMD ["--help"]

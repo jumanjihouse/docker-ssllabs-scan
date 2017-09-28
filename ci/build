@@ -23,12 +23,16 @@ docker-compose build builder
 # Copy binary into local directory.
 docker create --name scanbuild builder true
 docker cp scanbuild:/tmp/ssllabs-scan-${VERSION}/ssllabs-scan .
+docker cp scanbuild:/tmp/sleeper .
 
 # Copy certs into local directory.
 docker cp scanbuild:/etc/ssl/certs/ca-certificates.crt .
 
 # Build the runtime image.
 docker-compose build scanner
+
+# Build an image we use in the test harness.
+docker-compose build sleeper
 
 # Show image sizes.
 docker images | grep ssllabs-scan

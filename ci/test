@@ -24,3 +24,17 @@ docker-compose run --rm grade_github
 
 # Another syntax to do the same thing.
 docker-compose run --rm scanner -grade -usecache https://github.com
+
+# Start a sleeper container.
+# The process in this "FROM scratch" container is expected to run as user "user".
+cid=$(docker-compose run -d sleeper)
+
+# Check that sleeper runs as unprivileged user.
+# This proves that the technique to run a scratch container as a user still works.
+# The sleeper container does not have the "ps" command, so we
+# attach a regular container to the namespace of the sleeper container.
+docker run --rm -it --pid container:${cid} --network container:${cid} alpine:3.6 ps -o pid,user,group,comm | egrep '1 1000     1000     sleeper'
+docker-compose down
+
+echo
+echo OK
