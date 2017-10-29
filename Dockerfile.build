@@ -8,9 +8,9 @@ RUN apk upgrade --update --available && \
       musl-dev \
       && \
     apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/community \
-      'go>=1.8.1-r0' \
+      'go>=1.8.4-r0' \
     && apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/main \
-      'ca-certificates>=20161130-r2' \
+      'ca-certificates>=20170801-r0' \
     && adduser -D developer \
     && rm -f /var/cache/apk/*
 
