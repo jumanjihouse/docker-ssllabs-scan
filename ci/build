@@ -29,7 +29,6 @@ echo
 echo Copy binary into local directory.
 docker create --name scanbuild builder true
 docker cp scanbuild:/tmp/ssllabs-scan-${VERSION}/ssllabs-scan .
-docker cp scanbuild:/tmp/sleeper .
 
 echo
 echo Copy certs into local directory.

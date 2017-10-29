@@ -37,8 +37,8 @@ services:
     <<: *defaults
     image: sleeper
     build:
-      context: .
-      dockerfile: Dockerfile.sleeper
+      context: sleeper/
+      dockerfile: Dockerfile
 
   grade_github:
     <<: *defaults
