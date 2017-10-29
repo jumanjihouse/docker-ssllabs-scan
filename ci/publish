@@ -1,10 +1,20 @@
 #!/bin/sh
 set -e
+set -u
+
+. ci/functions.sh
+verbosity=1
 
 . ci/vars
+
+echo
+echo Publish images.
 docker login -u ${user} -p ${pass}
 docker tag jumanjiman/ssllabs-scan jumanjiman/ssllabs-scan:${TAG}
 docker push jumanjiman/ssllabs-scan:${TAG}
 docker push jumanjiman/ssllabs-scan:latest
 docker logout
+
+echo
+echo Trigger update on microbadger.
 curl -X POST 'https://hooks.microbadger.com/images/jumanjiman/ssllabs-scan/dsQe3-XA4hIfa2qdd_qndJZrOMg='

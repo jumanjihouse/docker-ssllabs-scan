@@ -13,7 +13,7 @@ echo Check that binary is static.
 file ssllabs-scan | grep -oh 'statically linked'
 
 echo
-echo Check that binary is stripped (no debug symbols).
+echo 'Check that binary is stripped (no debug symbols).'
 file ssllabs-scan | grep -oh 'stripped'
 file ssllabs-scan | grep -vq 'not stripped'
 

@@ -1,10 +1,14 @@
 #!/bin/sh
 set -e
+set -u
+
+. ci/functions.sh
+verbosity=1
 
 cat > ci/vars <<EOF
   VERSION=1.4.0
   BUILD_DATE=$(date +%Y%m%dT%H%M)
-  VCS_REF=${CIRCLE_SHA1:0:7}
+  VCS_REF=$(git describe --abbrev=7 --tags --always)
   TAG=\${VERSION}-\${BUILD_DATE}-git-\${VCS_REF}
 
   export VERSION
@@ -17,22 +21,28 @@ EOF
 
 ci/clean
 
-# Build the builder.
+echo
+echo Build the builder.
 docker-compose build builder
 
-# Copy binary into local directory.
+echo
+echo Copy binary into local directory.
 docker create --name scanbuild builder true
 docker cp scanbuild:/tmp/ssllabs-scan-${VERSION}/ssllabs-scan .
 docker cp scanbuild:/tmp/sleeper .
 
-# Copy certs into local directory.
+echo
+echo Copy certs into local directory.
 docker cp scanbuild:/etc/ssl/certs/ca-certificates.crt .
 
-# Build the runtime image.
+echo
+echo Build the runtime image.
 docker-compose build scanner
 
-# Build an image we use in the test harness.
+echo
+echo Build an image we use in the test harness.
 docker-compose build sleeper
 
-# Show image sizes.
+echo
+echo Show image sizes.
 docker images | grep ssllabs-scan
