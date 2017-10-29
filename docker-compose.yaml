@@ -1,21 +1,12 @@
 version: '2.1'
 
 services:
-  builder:
-    image: builder
-    env_file: ci/vars
-    build:
-      context: .
-      dockerfile: Dockerfile.build
-      args:
-        - VERSION
-
   scanner: &defaults
     image: jumanjiman/ssllabs-scan
     env_file: ci/vars
     build:
-      context: .
-      dockerfile: Dockerfile.runtime
+      context: scanner
+      dockerfile: Dockerfile
       args:
         - CIRCLE_BUILD_URL
         - BUILD_DATE
@@ -37,8 +28,8 @@ services:
     <<: *defaults
     image: sleeper
     build:
-      context: .
-      dockerfile: Dockerfile.sleeper
+      context: sleeper/
+      dockerfile: Dockerfile
 
   grade_github:
     <<: *defaults

@@ -4,12 +4,14 @@ jobs:
   build:
     docker:
       # https://github.com/jumanjihouse/cci/pulls?q=is%3Apr+is%3Aclosed
-      - image: jumanjiman/cci:20171029T1930-git-34c426b
+      - image: jumanjiman/cci:20171029T2141-git-540212d
 
     working_directory: ~/workdir/
 
     steps:
-      - setup_remote_docker
+      # https://circleci.com/docs/2.0/building-docker-images/#docker-version
+      - setup_remote_docker:
+          version: 17.06.1-ce
 
       - checkout
 

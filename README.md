@@ -61,7 +61,8 @@ How-to
 
 ### Build and test
 
-:warning: Build requires Docker 1.9.0 or later as well as docker-compose.
+:warning: Build requires Docker CE 17.06.1 (for multi-stage builds) or later
+as well as docker-compose.
 
     ci/build
     ci/test

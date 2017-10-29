@@ -19,22 +19,6 @@ EOF
 
 . ci/vars
 
-ci/clean
-
-echo
-echo Build the builder.
-docker-compose build builder
-
-echo
-echo Copy binary into local directory.
-docker create --name scanbuild builder true
-docker cp scanbuild:/tmp/ssllabs-scan-${VERSION}/ssllabs-scan .
-docker cp scanbuild:/tmp/sleeper .
-
-echo
-echo Copy certs into local directory.
-docker cp scanbuild:/etc/ssl/certs/ca-certificates.crt .
-
 echo
 echo Build the runtime image.
 docker-compose build scanner

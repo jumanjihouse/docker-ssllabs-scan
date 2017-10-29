@@ -4,9 +4,16 @@ set -u
 
 . ci/functions.sh
 
+ci/clean
+
 echo
 echo Check that image exists.
 docker images | grep ssllabs-scan
+
+echo
+echo Copy binary into local directory.
+docker create --name scanbuild jumanjiman/ssllabs-scan true
+docker cp scanbuild:/ssllabs-scan .
 
 echo
 echo Check that binary is static.
