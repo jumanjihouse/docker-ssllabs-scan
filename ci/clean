@@ -1,9 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 set -u
+set -o pipefail
+
+################################################################################
+# Clean the local dev environment.
+################################################################################
 
 . ci/functions.sh
-verbosity=1
 
 echo
 echo Clean up from previous runs.

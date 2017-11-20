@@ -1,113 +1,183 @@
 #!/bin/bash
 set -e
 set -u
+set -o pipefail
 
-. ci/functions.sh
+################################################################################
+# Check files in a git repo.
+#
+# Binaries are allowed in an "assets" directory and nowhere else.
+# Shell scripts must conform to shellcheck.
+# Trailing whitespace is not allowed.
+################################################################################
 
 usage() {
   cat <<EOF
-  Usage: $(basename $0) [-dh] [-v level]
-    -d          debug, shorthand for -v2
-    -h          help (this screen)
-    -v level    verbosity, where level is 0, 1, or 2
+  Usage: "$0" [-dh] [-v VERBOSITY]
+    -d            debug, shorthand for -v2
+    -h            help (this screen)
+    -v VERBOSITY, where VERBOSITY is 0, 1, or 2
 EOF
 }
 
 main() {
+  declare -i RC=0
+
   # https://github.com/koalaman/shellcheck/wiki/SC2044
-  code=0
-  while IFS= read -r -d '' file; do
+  while IFS=$'' read -r -d '' file; do
     debug checking "${file}"
-    if $(is_directory "{file}"); then
+    if is_directory "${file}"; then
       continue # A git submodule appears as a directory in "git ls-files".
     fi
-    check_binary "${file}"        || code=1
-    check_shell_syntax "${file}"  || code=1
-    check_whitespace "${file}"    || code=1
+    check_binary     "${file}" || RC=1
+    check_shell      "${file}" || RC=1
+    check_whitespace "${file}" || RC=1
   done < <(git ls-files -z)
-  return ${code}
+
+  return ${RC}
 }
 
 is_binary() {
-  file="$1"
-  code=1
-  file --mime --dereference "${file}" | grep 'binary$' &> /dev/null && code=0 || :
-  return ${code}
+  declare -r file="$1"
+  declare -i RC=1
+  declare output
+
+  output="$(file --mime --dereference "${file}")"
+  readonly output
+
+  if [[ ${output} =~ inode/x-empty ]]; then
+    : # Don't consider zero-sized file to be binary.
+  elif [[ "$(stat -c %s "${file}")" =~ "^0$" ]]; then
+    : # Don't consider zero-sized file to be binary.
+  elif [[ ${output} =~ binary$ ]]; then
+    RC=0
+  fi
+
+  return ${RC}
 }
 
 is_directory() {
+  declare -r file="$1"
   file --mime --dereference "${file}" | grep 'directory' &> /dev/null
 }
 
 is_shell_script() {
-  file="$1"
-  code=1
-  file --mime --dereference "${file}" | grep 'shellscript' &> /dev/null && code=0 || :
-  [[ "${file}" =~ .sh$ ]] && code=0 || :
-  return ${code}
+  declare -r file="$1"
+  declare -i RC=1
+
+  if file --mime --dereference "${file}" | grep 'shellscript' &> /dev/null; then
+    RC=0
+  elif [[ "${file}" =~ \.sh$ ]]; then
+    RC=0
+  fi
+
+  return ${RC}
 }
 
 check_binary() {
-  file="$1"
+  declare -r file="$1"
+  declare -i RC=0
+
   if [[ "${file}" =~ assets/ ]]; then
-    : # Binaries are allowed in the assets directory.
-  elif [[ $(stat --printf=%s "${file}") -eq 0 ]]; then
-    : # Zero-sized files are not binary.
-  elif $(is_binary "${file}"); then
-    err \"${file}\" is a binary file
-    return 1
+    RC=0 # Binaries are allowed in the assets directory.
+  elif is_binary "${file}"; then
+    err \""${file}"\" is a binary file
+    RC=1
   fi
+
+  return ${RC}
 }
 
-check_shell_syntax() {
-  file="$1"
-  if $(is_shell_script "${file}"); then
-    bash -n "${file}"
+check_shell() {
+  declare -r file="$1"
+  declare -i RC=0
+
+  if ! is_shell_script "${file}"; then
+    return 0
   fi
+
+  bash -n "${file}" || RC=1
+
+  if command -v shellcheck &> /dev/null; then
+    # https://github.com/koalaman/shellcheck
+    shellcheck "${file}" || RC=1
+  else
+    warn unable to find \"shellcheck\" in \$PATH ... skipping shellcheck checks
+  fi
+
+  return ${RC}
 }
 
 check_whitespace() {
-  file="$1"
-  if $(is_binary "${file}"); then
+  declare -r file="$1"
+  declare -i RC=1
+
+  if is_binary "${file}"; then
     # Binary files can have trailing whitespace.
     return 0
   fi
-  if [[ ${verbosity} -ge 2 ]]; then
-    grep -E '\s$' "${file}"
+
+  if [[ ${VERBOSITY} -ge 2 ]]; then
+    grep -E '\s$' "${file}" -n
   else
     grep -E '\s$' "${file}" &> /dev/null
   fi
-  if [[ $? -eq 0 ]]; then
-    err \"${file}\" has trailing whitespace
-    return 1
-  fi
+
+  case $? in
+    0)
+      # Found whitespace.
+      RC=1
+      err \""${file}"\" has trailing whitespace
+      ;;
+    1)
+      # Did not find whitespace.
+      RC=0
+      ;;
+    2|*)
+      # grep command failed.
+      exit 2
+      ;;
+  esac
+
+  return ${RC}
 }
+
+################################################################################
+# Program execution starts here.
+################################################################################
+
+# Default values.
+readonly LOCAL_SHELLCHECK_EXCLUDES="-e SC1091"
+declare -rx SHELLCHECK_OPTS="${SHELLCHECK_OPTS:-"${LOCAL_SHELLCHECK_EXCLUDES=}"}"
+
+. ci/functions.sh
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
 while getopts ":dhv:" opt; do
   case ${opt} in
     d)
-      verbosity=2
+      VERBOSITY=2
       ;;
     h)
       usage
       exit 0
       ;;
     v)
-      verbosity=${OPTARG}
+      VERBOSITY=${OPTARG}
       ;;
-    \:)
+    :)
       usage
-      err option -${OPTARG} requires an argument
+      err option -"${OPTARG}" requires an argument
       exit 1
       ;;
     \?|*)
       usage
-      err invalid option -${OPTARG}
+      err invalid option -"${OPTARG}"
       exit 1
       ;;
   esac
 done
+readonly VERBOSITY
 
 # After the shift, $* contains non-option arguments.
 shift $((OPTIND-1))

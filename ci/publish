@@ -1,17 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 set -u
+set -o pipefail
+
+################################################################################
+# Publish the image(s) to docker hub.
+################################################################################
 
 . ci/functions.sh
-verbosity=1
 
 . ci/vars
 
 echo
 echo Publish images.
-docker login -u ${user} -p ${pass}
-docker tag jumanjiman/ssllabs-scan jumanjiman/ssllabs-scan:${TAG}
-docker push jumanjiman/ssllabs-scan:${TAG}
+# shellcheck disable=SC2154
+docker login -u "${user}" -p "${pass}"
+docker tag jumanjiman/ssllabs-scan jumanjiman/ssllabs-scan:"${TAG}"
+docker push jumanjiman/ssllabs-scan:"${TAG}"
 docker push jumanjiman/ssllabs-scan:latest
 docker logout
 

@@ -1,10 +1,21 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 set -u
+set -o pipefail
+
+################################################################################
+# Run the test harness. Invoke as "ci/test".
+################################################################################
 
 . ci/functions.sh
 
 ci/clean
+
+echo
+echo Check every file for things like trailing whitespace.
+# Hint: -v1 shows just the names of offending files.
+#       -v2 shows lines with trailing whitespace.
+ci/check-files -v2
 
 echo
 echo Check that image exists.
@@ -38,7 +49,7 @@ echo Check that binary works.
 docker-compose run --rm grade_github
 
 echo
-echo Another syntax to do the same thing.
+echo 'Another syntax to do the same thing.'
 docker-compose run --rm scanner -grade -usecache https://github.com
 
 echo
@@ -51,11 +62,5 @@ echo Check that sleeper runs as unprivileged user.
 echo This proves that the technique to run a scratch container as a user still works.
 echo The sleeper container does not have the "ps" command, so we
 echo attach a regular container to the namespace of the sleeper container.
-docker run --rm -it --pid container:${cid} --network container:${cid} alpine:3.6 ps -o pid,user,group,comm | egrep '1 1000     1000     sleeper'
+docker run --rm -it --pid container:"${cid}" --network container:"${cid}" alpine:3.6 ps -o pid,user,group,comm | grep -E '1 1000     1000     sleeper'
 docker-compose down
-
-echo
-echo Check every file for things like trailing whitespace.
-# Hint: -v1 shows just the names of offending files.
-#       -v2 shows lines with trailing whitespace.
-ci/check-files -v1

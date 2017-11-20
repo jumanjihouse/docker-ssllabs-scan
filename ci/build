@@ -1,20 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 set -u
+set -o pipefail
+
+################################################################################
+# Build the image(s). Invoke as "ci/build".
+################################################################################
 
 . ci/functions.sh
-verbosity=1
 
 cat > ci/vars <<EOF
-  VERSION=1.4.0
-  BUILD_DATE=$(date +%Y%m%dT%H%M)
-  VCS_REF=$(git describe --abbrev=7 --tags --always)
-  TAG=\${VERSION}-\${BUILD_DATE}-git-\${VCS_REF}
-
-  export VERSION
-  export BUILD_DATE
-  export VCS_REF
-  export TAG
+declare -rx  VERSION=1.4.0
+declare -rx  BUILD_DATE=$(date +%Y%m%dT%H%M)
+declare -rx  VCS_REF=$(git describe --abbrev=7 --tags --always)
+declare -rx  TAG=\${VERSION}-\${BUILD_DATE}-git-\${VCS_REF}
 EOF
 
 . ci/vars
