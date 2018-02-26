@@ -11,7 +11,7 @@ jobs:
     steps:
       # https://circleci.com/docs/2.0/building-docker-images/#docker-version
       - setup_remote_docker:
-          version: 17.06.1-ce
+          version: 17.09.0-ce
 
       - checkout
 
