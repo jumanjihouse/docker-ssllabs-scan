@@ -1,4 +1,4 @@
-FROM alpine:3.6 as sleeper_builder
+FROM alpine:3.7 as sleeper_builder
 
 ARG VERSION
 
@@ -8,11 +8,11 @@ RUN apk add --no-cache \
       && :
 
 RUN apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/community \
-      'go>=1.8.4-r0' \
+      'go>=1.9.4-r0' \
       && :
 
 RUN apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/main \
-      'ca-certificates>=20170801-r0' \
+      'ca-certificates>=20171114-r0' \
       && :
 
 RUN adduser -D developer
