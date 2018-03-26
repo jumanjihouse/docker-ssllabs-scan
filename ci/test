@@ -7,15 +7,14 @@ set -o pipefail
 # Run the test harness. Invoke as "ci/test".
 ################################################################################
 
+. ci/bootstrap
 . ci/functions.sh
 
 ci/clean
 
 echo
 echo Check every file for things like trailing whitespace.
-# Hint: -v1 shows just the names of offending files.
-#       -v2 shows lines with trailing whitespace.
-ci/check-files -v2
+run_precommit
 
 echo
 echo Check that image exists.

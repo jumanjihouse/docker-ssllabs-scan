@@ -1,3 +1,4 @@
+---
 # https://circleci.com/docs/docker
 version: 2
 jobs:
@@ -16,6 +17,11 @@ jobs:
       - checkout
 
       - run:
+          name: Bootstrap the dev environment
+          command: |
+            ci/bootstrap
+
+      - run:
           name: Build the image
           command: |
             ci/build
@@ -27,6 +33,7 @@ jobs:
 
       - deploy:
           name: Deploy from master branch
+          # yamllint disable rule:line-length
           command: |
             if [[ ${CIRCLE_BRANCH} = master ]] && [[ -z ${CIRCLE_PR_NUMBER} ]]; then
               ci/publish
