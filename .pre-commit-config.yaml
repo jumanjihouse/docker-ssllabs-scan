@@ -16,6 +16,7 @@ repos:
       - id: git-check  # Configure in .gitattributes
       - id: git-dirty  # Configure in .gitignore
       - id: shellcheck
+      - id: shfmt
 
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.11.1

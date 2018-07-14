@@ -9,7 +9,7 @@ set -o pipefail
 
 . ci/functions.sh
 
-cat > ci/vars <<EOF
+cat >ci/vars <<EOF
 declare -rx  VERSION=1.4.0
 declare -rx  BUILD_DATE=$(date +%Y%m%dT%H%M)
 declare -rx  VCS_REF=$(git describe --abbrev=7 --tags --always)

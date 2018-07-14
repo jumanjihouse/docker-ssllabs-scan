@@ -8,7 +8,8 @@
 declare -i VERBOSITY=${VERBOSITY:-1}
 
 smitty() {
-  echo; echo
+  echo
+  echo
   echo "SMITTY: $*"
   "$@"
 }

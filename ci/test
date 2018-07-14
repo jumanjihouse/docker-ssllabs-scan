@@ -39,7 +39,7 @@ if [ "${CIRCLECI:-false}" == true ]; then
   echo Check that image has ci-build-url label.
   docker inspect \
     -f '{{ index .Config.Labels "io.github.jumanjiman.ci-build-url" }}' \
-    jumanjiman/ssllabs-scan | \
+    jumanjiman/ssllabs-scan |
     grep 'circleci.com'
 fi
 
