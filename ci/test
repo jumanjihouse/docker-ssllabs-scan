@@ -61,5 +61,5 @@ echo Check that sleeper runs as unprivileged user.
 echo This proves that the technique to run a scratch container as a user still works.
 echo The sleeper container does not have the "ps" command, so we
 echo attach a regular container to the namespace of the sleeper container.
-docker run --rm -it --pid container:"${cid}" --network container:"${cid}" alpine:3.6 ps -o pid,user,group,comm | grep -E '1 1000     1000     sleeper'
+docker run --rm -it --pid container:"${cid}" --network container:"${cid}" alpine:3.8 ps -o pid,user,group,comm | grep -E '1 1000     1000     sleeper'
 docker-compose down
