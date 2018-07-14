@@ -8,6 +8,7 @@ repos:
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 1.8.0
     hooks:
+      - id: check-mailmap
       - id: forbid-binary
         exclude: >
           (?x)^(
