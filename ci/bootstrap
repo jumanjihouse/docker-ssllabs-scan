@@ -7,21 +7,11 @@ set -o pipefail
 # Invoke from the root of the git repo as "ci/bootstrap".
 ################################################################################
 
-trap finish EXIT
+. ci/functions.sh
 
 main() {
   setup_python_path
   install_precommit
-}
-
-finish() {
-  declare -ri RC=$?
-
-  if [[ $RC -eq 0 ]]; then
-    echo "$0 OK"
-  else
-    echo "[ERROR] $0 failed with exit status $RC"
-  fi
 }
 
 setup_python_path() {
@@ -35,12 +25,12 @@ setup_python_path() {
 
 install_precommit() {
   if ! command -v pre-commit &>/dev/null; then
-    pip install --user -Iv --compile --no-cache-dir pre-commit
+    run pip install --user -Iv --compile --no-cache-dir pre-commit
   fi
 }
 
 run_precommit() {
-  pre-commit run --all-files --verbose
+  run pre-commit run --all-files --verbose
 }
 
 main

@@ -1,6 +1,5 @@
 #!/bin/bash
-set -e
-set -u
+set -eEu
 set -o pipefail
 
 ################################################################################
@@ -18,14 +17,11 @@ EOF
 
 . ci/vars
 
-echo
-echo Build the runtime image.
-docker-compose build scanner
+info Build the runtime image.
+run docker-compose build scanner
 
-echo
-echo Build an image we use in the test harness.
-docker-compose build sleeper
+info Build an image we use in the test harness.
+run docker-compose build sleeper
 
-echo
-echo Show image sizes.
-docker images | grep ssllabs-scan
+info Show image sizes.
+run docker images | grep ssllabs-scan

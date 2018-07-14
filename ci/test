@@ -1,6 +1,5 @@
 #!/bin/bash
-set -e
-set -u
+set -eEu
 set -o pipefail
 
 ################################################################################
@@ -12,54 +11,45 @@ set -o pipefail
 
 ci/clean
 
-echo
-echo Check every file for things like trailing whitespace.
+info Check every file for things like trailing whitespace.
 run_precommit
 
-echo
-echo Check that image exists.
-docker images | grep ssllabs-scan
+info Check that image exists.
+run docker images | grep ssllabs-scan
 
-echo
-echo Copy binary into local directory.
-docker create --name scanbuild jumanjiman/ssllabs-scan true
-docker cp scanbuild:/ssllabs-scan .
+info Copy binary into local directory.
+run docker create --name scanbuild jumanjiman/ssllabs-scan true
+run docker cp scanbuild:/ssllabs-scan .
 
-echo
-echo Check that binary is static.
+info Check that binary is static.
 file ssllabs-scan | grep -oh 'statically linked'
 
-echo
-echo 'Check that binary is stripped (no debug symbols).'
+info 'Check that binary is stripped (no debug symbols).'
 file ssllabs-scan | grep -oh 'stripped'
 file ssllabs-scan | grep -vq 'not stripped'
 
 if [ "${CIRCLECI:-false}" == true ]; then
-  echo
-  echo Check that image has ci-build-url label.
+  info Check that image has ci-build-url label.
   docker inspect \
     -f '{{ index .Config.Labels "io.github.jumanjiman.ci-build-url" }}' \
     jumanjiman/ssllabs-scan |
     grep 'circleci.com'
 fi
 
-echo
-echo Check that binary works.
-docker-compose run --rm grade_github
+info Check that binary works.
+run docker-compose run --rm grade_github
 
-echo
-echo 'Another syntax to do the same thing.'
-docker-compose run --rm scanner -grade -usecache https://github.com
+info 'Another syntax to do the same thing.'
+run docker-compose run --rm scanner -grade -usecache https://github.com
 
-echo
-echo Start a sleeper container.
-echo The process in this "FROM scratch" container is expected to run as user "user".
+info Start a sleeper container.
+info The process in this "FROM scratch" container is expected to run as user "user".
 cid=$(docker-compose run -d sleeper)
 
-echo
-echo Check that sleeper runs as unprivileged user.
-echo This proves that the technique to run a scratch container as a user still works.
-echo The sleeper container does not have the "ps" command, so we
-echo attach a regular container to the namespace of the sleeper container.
-docker run --rm -it --pid container:"${cid}" --network container:"${cid}" alpine:3.8 ps -o pid,user,group,comm | grep -E '1 1000     1000     sleeper'
-docker-compose down
+info Check that sleeper runs as unprivileged user.
+info This proves that the technique to run a scratch container as a user still works.
+info The sleeper container does not have the "ps" command, so we
+info attach a regular container to the namespace of the sleeper container.
+run docker run --rm -it --pid container:"${cid}" --network container:"${cid}" alpine:3.8 ps -o pid,user,group,comm |
+  grep -E -e run -e '1 1000     1000     sleeper'
+run docker-compose down
