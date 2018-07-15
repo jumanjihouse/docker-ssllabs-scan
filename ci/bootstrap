@@ -7,40 +7,42 @@ set -o pipefail
 # Invoke from the root of the git repo as "ci/bootstrap".
 ################################################################################
 
-trap finish EXIT
+. ci/functions.sh
 
 main() {
   setup_python_path
   install_precommit
-}
-
-finish() {
-  declare -ri RC=$?
-
-  if [[ $RC -eq 0 ]]; then
-    echo "$0 OK"
-  else
-    echo "[ERROR] $0 failed with exit status $RC"
-  fi
+  add_upstream_git_remote
+  fetch_upstream
 }
 
 setup_python_path() {
   PYTHON_PATH="$(python -c "import site; print(site.USER_BASE)")"
   readonly PYTHON_PATH
 
-  if ! grep "${PYTHON_PATH}/bin" <(printenv PATH) &> /dev/null; then
+  if ! grep "${PYTHON_PATH}/bin" <(printenv PATH) &>/dev/null; then
     export PATH="${PATH}:${PYTHON_PATH}/bin"
   fi
 }
 
 install_precommit() {
-  if ! command -v pre-commit &> /dev/null; then
-    pip install --user -Iv --compile --no-cache-dir pre-commit
+  if ! command -v pre-commit &>/dev/null; then
+    run pip install --user -Iv --compile --no-cache-dir pre-commit
   fi
 }
 
 run_precommit() {
-  pre-commit run --all-files --verbose
+  run pre-commit run --all-files --hook-stage manual
+}
+
+add_upstream_git_remote() {
+  if ! git remote show upstream &>/dev/null; then
+    git remote add upstream https://github.com/jumanjihouse/docker-ssllabs-scan.git
+  fi
+}
+
+fetch_upstream() {
+  git fetch upstream
 }
 
 main

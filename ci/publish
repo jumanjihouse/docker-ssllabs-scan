@@ -1,6 +1,5 @@
 #!/bin/bash
-set -e
-set -u
+set -eEu
 set -o pipefail
 
 ################################################################################
@@ -11,15 +10,14 @@ set -o pipefail
 
 . ci/vars
 
-echo
-echo Publish images.
+info Publish images.
 # shellcheck disable=SC2154
 docker login -u "${user}" -p "${pass}"
-docker tag jumanjiman/ssllabs-scan jumanjiman/ssllabs-scan:"${TAG}"
-docker push jumanjiman/ssllabs-scan:"${TAG}"
-docker push jumanjiman/ssllabs-scan:latest
+run docker tag jumanjiman/ssllabs-scan jumanjiman/ssllabs-scan:"${TAG}"
+run docker push jumanjiman/ssllabs-scan:"${TAG}"
+run docker push jumanjiman/ssllabs-scan:latest
 docker logout
 
+info Trigger update on microbadger.
+run curl -X POST 'https://hooks.microbadger.com/images/jumanjiman/ssllabs-scan/dsQe3-XA4hIfa2qdd_qndJZrOMg='
 echo
-echo Trigger update on microbadger.
-curl -X POST 'https://hooks.microbadger.com/images/jumanjiman/ssllabs-scan/dsQe3-XA4hIfa2qdd_qndJZrOMg='

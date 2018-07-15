@@ -1,6 +1,5 @@
 #!/bin/bash
-set -e
-set -u
+set -eEu
 set -o pipefail
 
 ################################################################################
@@ -9,8 +8,7 @@ set -o pipefail
 
 . ci/functions.sh
 
-echo
-echo Clean up from previous runs.
-rm -f ssllabs-scan        || :
-docker rm -f scanbuild    || :
-docker rmi -f scanbuild   || :
+info Clean up from previous runs.
+run rm -f ssllabs-scan || :
+run docker rm -f scanbuild || :
+run docker rmi -f scanbuild || :
