@@ -12,6 +12,8 @@ set -o pipefail
 main() {
   setup_python_path
   install_precommit
+  add_upstream_git_remote
+  fetch_upstream
 }
 
 setup_python_path() {
@@ -30,7 +32,17 @@ install_precommit() {
 }
 
 run_precommit() {
-  run pre-commit run --all-files --verbose
+  run pre-commit run --all-files --hook-stage manual
+}
+
+add_upstream_git_remote() {
+  if ! git remote show upstream &>/dev/null; then
+    git remote add upstream https://github.com/jumanjihouse/docker-ssllabs-scan.git
+  fi
+}
+
+fetch_upstream() {
+  git fetch upstream
 }
 
 main

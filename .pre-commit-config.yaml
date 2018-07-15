@@ -48,3 +48,15 @@ repos:
           (?x)^(
             sleeper/sleeper.go
           )$
+
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: v0.10.0
+    hooks:
+      - id: gitlint
+        stages: [commit-msg]
+
+      - id: gitlint
+        entry: gitlint --commits upstream/master..
+        exclude: .*
+        always_run: true
+        stages: [manual]
