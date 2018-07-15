@@ -4,7 +4,7 @@ SSL site scanner
 [![Download size](https://images.microbadger.com/badges/image/jumanjiman/ssllabs-scan.svg)](http://microbadger.com/images/jumanjiman/ssllabs-scan "View on microbadger.com")&nbsp;
 [![Version](https://images.microbadger.com/badges/version/jumanjiman/ssllabs-scan.svg)](http://microbadger.com/images/jumanjiman/ssllabs-scan "View on microbadger.com")&nbsp;
 [![Docker Registry](https://img.shields.io/docker/pulls/jumanjiman/ssllabs-scan.svg)](https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan "Go to Docker hub")&nbsp;
-[![Circle CI](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan.png?circle-token=b75db48608f115c0cb9760708be3839b48d41f8e)](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan/tree/master 'View CI builds')
+[![Circle CI](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan.png?style=svg&circle-token=b75db48608f115c0cb9760708be3839b48d41f8e)](https://circleci.com/gh/jumanjihouse/docker-ssllabs-scan/tree/master 'View CI builds')
 
 Source code:    https://github.com/jumanjihouse/docker-ssllabs-scan/<br/>
 Docker image:   https://registry.hub.docker.com/u/jumanjiman/ssllabs-scan/<br/>
