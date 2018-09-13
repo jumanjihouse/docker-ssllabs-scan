@@ -13,9 +13,22 @@ Image metadata: http://microbadger.com/images/jumanjiman/ssllabs-scan/
 :warning: You must use version 1.4.0 or later of this image
 for compatibility with the Qualys SSL Labs Service API.
 
+- [About](#about)
+  - [Overview](#overview)
+  - [Build integrity](#build-integrity)
+  - [License](#license)
+- [How-to](#how-to)
+  - [Build and test](#build-and-test)
+  - [Pull an already-built image](#pull-an-already-built-image)
+  - [View image labels](#view-image-labels)
+  - [Scan public sites](#scan-public-sites)
+  - [Scan private sites](#scan-private-sites)
+
 
 About
 -----
+
+### Overview
 
 This git repo downloads golang source code from
 https://github.com/ssllabs/ssllabs-scan
@@ -50,8 +63,7 @@ it pushes the built images to the Docker hub.
 ![workflow](assets/docker_hub_workflow.png)
 
 
-License
--------
+### License
 
 See [LICENSE.md](https://github.com/jumanjiman/docker-ssllabs-scan/blob/master/LICENSE.md)
 in this git repo.
@@ -98,7 +110,7 @@ Query all the labels inside a built image:
     docker inspect jumanjiman/ssllabs-scan | jq -M '.[].Config.Labels'
 
 
-### Run
+### Scan public sites
 
 The following example uses `--read-only` and `--cap-drop all` as recommended by the
 CIS Docker Security Benchmarks:
@@ -163,7 +175,7 @@ You can use `docker-compose` with the `docker-compose.yaml` file in this git rep
     2017/05/13 15:35:40 [INFO] All assessments complete; shutting down
 
 
-### Scan internal sites
+### Scan private sites
 
 You can add entries to `/etc/hosts` via `docker run --add-host`
 or via the docker-compose `extra_hosts` option.
