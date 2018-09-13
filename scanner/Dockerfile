@@ -48,7 +48,7 @@ CMD ["--help"]
 ARG VERSION
 COPY --from=scanner_builder /tmp/ssllabs-scan-${VERSION}/ssllabs-scan /
 COPY --from=scanner_builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-COPY passwd /etc/passwd
+COPY . /
 
 ARG CIRCLE_BUILD_URL
 ARG BUILD_DATE
