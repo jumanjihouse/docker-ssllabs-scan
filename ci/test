@@ -52,4 +52,10 @@ info The sleeper container does not have the "ps" command, so we
 info attach a regular container to the namespace of the sleeper container.
 run docker run --rm -it --pid container:"${cid}" --network container:"${cid}" alpine:3.8 ps -o pid,user,group,comm |
   grep -E -e run -e '1 1000     1000     sleeper'
+
+info 'Check that /etc/hosts entries are used.'
+info 'The sleeper container does not have the "ping" command, so we'
+info 'attach a regular container to the namespace of the sleeper container.'
+run docker run --rm -it --pid container:"${cid}" --network container:"${cid}" alpine:3.8 ping -c1 -W2 static-host.com
+
 run docker-compose down
