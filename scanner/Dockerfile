@@ -34,7 +34,7 @@ RUN cd /tmp && \
       -tags netgo \
       -ldflags '-extldflags "-static" -s' \
       -buildmode exe \
-      ssllabs-scan.go
+      ssllabs-scan-v3.go
 
 #
 # Build the runtime image.
@@ -46,7 +46,7 @@ ENTRYPOINT ["/ssllabs-scan"]
 CMD ["--help"]
 
 ARG VERSION
-COPY --from=scanner_builder /tmp/ssllabs-scan-${VERSION}/ssllabs-scan /
+COPY --from=scanner_builder /tmp/ssllabs-scan-${VERSION}/ssllabs-scan-v3 /ssllabs-scan
 COPY --from=scanner_builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY . /
 
