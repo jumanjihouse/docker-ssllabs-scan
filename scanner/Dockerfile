@@ -1,4 +1,4 @@
-FROM alpine:3.8 as scanner_builder
+FROM alpine:3.9 as scanner_builder
 
 ARG VERSION
 
@@ -8,11 +8,11 @@ RUN apk add --no-cache \
       && :
 
 RUN apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/community \
-      'go>=1.10.1-r0' \
+      'go>=1.11.5-r0' \
       && :
 
 RUN apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/main \
-      'ca-certificates>=20171114-r3' \
+      'ca-certificates>=20190108-r0' \
       && :
 
 RUN adduser -D developer
