@@ -1,0 +1,25 @@
+# This list is used by git-shortlog to fix a few botched name translations
+# in the git archive, making contributions from the same person
+# appearing not to be so. Reasons include:
+#
+# * the author's full name was messed up and/or
+# * not always written the same way
+# * the author has multiple email addresses
+#
+# Note: NEVER REMOVE A MAILMAP ENTRY.
+#       These maps tie a commit author to a real human for
+#       accountability. If you remove a mailmap, then we lose
+#       the tie between author and human.
+#
+# -------------------------------------------------------------------
+# Format of each line allows mailmap to replace both the name
+# and the email of a commit matching the specified commit email:
+#
+# Proper Name <proper@email.xx>     Commit Name <commit@email.xx>
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# How we want it to appear          How it actually exists in git log
+#
+# See git-shortlog(1) for more explanation.
+# -------------------------------------------------------------------
+#
+Daniel Sutton <daniel@ducksecops.uk> ducksecops <daniel@ducksecops.uk>
