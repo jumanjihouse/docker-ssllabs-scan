@@ -1,4 +1,4 @@
-FROM alpine:3.11.6 as scanner_builder
+FROM alpine:3.12.0 as scanner_builder
 
 ARG VERSION
 
