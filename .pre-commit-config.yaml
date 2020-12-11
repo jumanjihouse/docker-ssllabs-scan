@@ -6,7 +6,7 @@ fail_fast: false
 
 repos:
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
-    rev: 1.8.0
+    rev: 1.11.4
     hooks:
       - id: check-mailmap
       - id: forbid-binary
