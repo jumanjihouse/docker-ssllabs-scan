@@ -29,11 +29,11 @@ file ssllabs-scan | grep -oh 'stripped'
 file ssllabs-scan | grep -vq 'not stripped'
 
 if [ "${CIRCLECI:-false}" == true ]; then
-  info Check that image has ci-build-url label.
-  docker inspect \
-    -f '{{ index .Config.Labels "io.github.jumanjiman.ci-build-url" }}' \
-    jumanjiman/ssllabs-scan |
-    grep 'circleci.com'
+    info Check that image has ci-build-url label.
+    docker inspect \
+        -f '{{ index .Config.Labels "io.github.jumanjiman.ci-build-url" }}' \
+        jumanjiman/ssllabs-scan \
+        | grep 'circleci.com'
 fi
 
 info Check that binary works.
@@ -50,12 +50,12 @@ info Check that sleeper runs as unprivileged user.
 info This proves that the technique to run a scratch container as a user still works.
 info The sleeper container does not have the "ps" command, so we
 info attach a regular container to the namespace of the sleeper container.
-run docker run --rm -it --pid container:"${cid}" --network container:"${cid}" alpine:3.9 ps -o pid,user,group,comm |
-  grep -E -e run -e '1 1000     1000     sleeper'
+run docker run --rm -it --pid container:"${cid}" --network container:"${cid}" alpine:3.17.2 ps -o pid,user,group,comm \
+    | grep -E -e run -e '1 1000     1000     sleeper'
 
 info 'Check that /etc/hosts entries are used.'
 info 'The sleeper container does not have the "ping" command, so we'
 info 'attach a regular container to the namespace of the sleeper container.'
-run docker run --rm -it --pid container:"${cid}" --network container:"${cid}" alpine:3.9 ping -c1 -W2 static-host.com
+run docker run --rm -it --pid container:"${cid}" --network container:"${cid}" alpine:3.17.2 ping -c1 -W2 static-host.com
 
 run docker-compose down

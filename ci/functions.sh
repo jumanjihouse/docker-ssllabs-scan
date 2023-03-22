@@ -10,57 +10,57 @@ declare -i VERBOSITY=${VERBOSITY:-1}
 . ci/ansi
 
 run() {
-  ansi --yellow-intense --newline "[RUN] $*"
-  "$@"
+    ansi --yellow-intense --newline "[RUN] $*"
+    "$@"
 }
 
 err() {
-  ansi --bold --red --newline "[ERROR] $*"
+    ansi --bold --red --newline "[ERROR] $*"
 }
 
 info() {
-  ansi --faint --newline "[INFO] $*"
+    ansi --faint --newline "[INFO] $*"
 }
 
 pass() {
-  ansi --bold --green --newline "[PASS] $*"
-  echo
+    ansi --bold --green --newline "[PASS] $*"
+    echo
 }
 
 warn() {
-  ansi --yellow-intense --newline "[WARN] $*"
+    ansi --yellow-intense --newline "[WARN] $*"
 }
 
 debug() {
-  if [[ ${VERBOSITY} -ge 2 ]]; then
-    ansi --yellow-intense --newline "[DEBUG] $*"
-  fi
+    if [[ ${VERBOSITY} -ge 2 ]]; then
+        ansi --yellow-intense --newline "[DEBUG] $*"
+    fi
 }
 
 finish() {
-  declare -ri RC=$?
+    declare -ri RC=$?
 
-  if [ ${RC} -eq 0 ]; then
-    pass "$0 OK"
-  else
-    err "$0" failed with exit code ${RC}
-  fi
+    if [ ${RC} -eq 0 ]; then
+        pass "$0 OK"
+    else
+        err "$0" failed with exit code ${RC}
+    fi
 }
 
 is_ci() {
-  # Are we running in hands-free CI?
-  [[ -n "${CIRCLECI:-}" ]]
+    # Are we running in hands-free CI?
+    [[ -n "${CIRCLECI:-}" ]]
 }
 
 check_top_dir() {
-  declare git_dir
-  git_dir="$(git rev-parse --show-toplevel)"
-  readonly git_dir
+    declare git_dir
+    git_dir="$(git rev-parse --show-toplevel)"
+    readonly git_dir
 
-  if ! [[ "$PWD" == "${git_dir}" ]]; then
-    err Please run these scripts from the root of the repo
-    exit 1
-  fi
+    if ! [[ "$PWD" == "${git_dir}" ]]; then
+        err Please run these scripts from the root of the repo
+        exit 1
+    fi
 }
 
 # Traps.

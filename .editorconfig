@@ -1,0 +1,30 @@
+# Config for https://editorconfig.org/
+# top-most EditorConfig file
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+charset = utf-8
+binary_next_line   = true  # like shfmt -bn
+switch_case_indent = true  # like shfmt -ci
+max_line_length = 80
+
+[*.md]
+indent_size = 2
+# https://github.com/updownpress/markdown-lint/blob/c535ca7f/rules/013-line-length.md
+max_line_length = 80
+
+[Makefile]
+indent_style = tab
+indent_size = unset
+
+[*.go]
+indent_style = tab
+indent_size = unset
+
+[COMMIT_EDITMSG]
+max_line_length = 72
