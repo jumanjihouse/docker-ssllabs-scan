@@ -1,7 +1,5 @@
 FROM alpine:3.17.2 as scanner_builder
 
-ARG VERSION
-
 RUN apk add --no-cache \
       curl \
       musl-dev \
@@ -21,10 +19,14 @@ RUN adduser -D developer
 USER developer
 
 # https://github.com/golang/go/issues/9344#issuecomment-69944514
+ARG VERSION
 RUN cd /tmp && \
-    curl -sSLO https://github.com/ssllabs/ssllabs-scan/archive/v${VERSION}.tar.gz && \
-    tar xvzf v${VERSION}.tar.gz && \
-    cd ssllabs-scan-${VERSION} && \
+    curl -sSL "https://github.com/ssllabs/ssllabs-scan/tarball/${VERSION}" -o ssllabs-scan.tgz \
+        && \
+    tar xvzf ssllabs-scan.tgz \
+        && \
+    cd "ssllabs-ssllabs-scan-${VERSION}" \
+        && \
     GOPATH=~ \
     CGO_ENABLED=0 \
     GOOS=linux \
@@ -46,7 +48,7 @@ ENTRYPOINT ["/ssllabs-scan"]
 CMD ["--help"]
 
 ARG VERSION
-COPY --from=scanner_builder /tmp/ssllabs-scan-${VERSION}/ssllabs-scan-v3 /ssllabs-scan
+COPY --from=scanner_builder /tmp/ssllabs-ssllabs-scan-${VERSION}/ssllabs-scan-v3 /ssllabs-scan
 COPY --from=scanner_builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY . /
 
