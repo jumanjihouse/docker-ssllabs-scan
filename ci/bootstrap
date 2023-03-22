@@ -10,39 +10,39 @@ set -o pipefail
 . ci/functions.sh
 
 main() {
-  setup_python_path
-  install_precommit
-  add_upstream_git_remote
-  fetch_upstream
+    setup_python_path
+    install_precommit
+    add_upstream_git_remote
+    fetch_upstream
 }
 
 setup_python_path() {
-  PYTHON_PATH="$(python -c "import site; print(site.USER_BASE)")"
-  readonly PYTHON_PATH
+    PYTHON_PATH="$(python -c "import site; print(site.USER_BASE)")"
+    readonly PYTHON_PATH
 
-  if ! grep "${PYTHON_PATH}/bin" <(printenv PATH) &>/dev/null; then
-    export PATH="${PATH}:${PYTHON_PATH}/bin"
-  fi
+    if ! grep "${PYTHON_PATH}/bin" <(printenv PATH) &>/dev/null; then
+        export PATH="${PATH}:${PYTHON_PATH}/bin"
+    fi
 }
 
 install_precommit() {
-  if ! command -v pre-commit &>/dev/null; then
-    run pip install --user -Iv --compile --no-cache-dir pre-commit
-  fi
+    if ! command -v pre-commit &>/dev/null; then
+        run pip install --user -Iv --compile --no-cache-dir pre-commit
+    fi
 }
 
 run_precommit() {
-  run pre-commit run --all-files --hook-stage manual
+    run pre-commit run --all-files --hook-stage manual
 }
 
 add_upstream_git_remote() {
-  if ! git remote show upstream &>/dev/null; then
-    git remote add upstream https://github.com/jumanjihouse/docker-ssllabs-scan.git
-  fi
+    if ! git remote show upstream &>/dev/null; then
+        git remote add upstream https://github.com/jumanjihouse/docker-ssllabs-scan.git
+    fi
 }
 
 fetch_upstream() {
-  git fetch upstream
+    git fetch upstream
 }
 
 main
