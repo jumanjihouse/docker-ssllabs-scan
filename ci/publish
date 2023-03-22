@@ -17,7 +17,3 @@ run docker tag jumanjiman/ssllabs-scan jumanjiman/ssllabs-scan:"${TAG}"
 run docker push jumanjiman/ssllabs-scan:"${TAG}"
 run docker push jumanjiman/ssllabs-scan:latest
 docker logout
-
-info Trigger update on microbadger.
-run curl -X POST 'https://hooks.microbadger.com/images/jumanjiman/ssllabs-scan/dsQe3-XA4hIfa2qdd_qndJZrOMg='
-echo
