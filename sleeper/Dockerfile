@@ -1,4 +1,4 @@
-FROM alpine:3.17.2 as sleeper_builder
+FROM alpine:3.19.1 as sleeper_builder
 
 ARG VERSION
 
